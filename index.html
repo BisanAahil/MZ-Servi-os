@@ -1028,6 +1028,39 @@
     }
 
 </script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, addDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC2JeFAudbI7mz4pmuSbZ0GFiatxawUpME",
+  authDomain: "mz-services-82263.firebaseapp.com",
+  projectId: "mz-services-82263",
+  storageBucket: "mz-services-82263.firebasestorage.app",
+  messagingSenderId: "430500696449",
+  appId: "1:430500696449:web:edf9b21d6884e3c2601880"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// 👉 SALVAR
+window.salvarUsuario = async function(nome, provincia) {
+  await addDoc(collection(db, "usuarios"), {
+    nome: nome,
+    provincia: provincia
+  });
+  alert("Salvo com sucesso!");
+}
+
+// 👉 LER
+window.carregarUsuarios = async function() {
+  const querySnapshot = await getDocs(collection(db, "usuarios"));
+  querySnapshot.forEach((doc) => {
+    console.log(doc.data());
+  });
+}
+</script>
 
 </body>
 </html>
