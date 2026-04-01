@@ -88,10 +88,7 @@
             }
         }
 
-        h1,
-        h2,
-        h3,
-        h4 {
+        h1, h2, h3, h4 {
             color: var(--text-dark);
             margin-bottom: 10px;
         }
@@ -160,6 +157,7 @@
 
         .form-group {
             margin-bottom: 18px;
+            width: 100%;
         }
 
         label {
@@ -170,6 +168,8 @@
             font-size: 14px;
         }
 
+        input[type="email"],
+        input[type="password"],
         input[type="text"],
         input[type="tel"],
         input[type="number"],
@@ -236,7 +236,7 @@
             margin-bottom: 50px;
         }
 
-        #screen-onboarding .icon-logo {
+        .icon-logo {
             font-size: 90px;
             color: var(--secondary);
             text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -244,17 +244,9 @@
         }
 
         @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.05);
-            }
-
-            100% {
-                transform: scale(1);
-            }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
 
         .user-welcome {
@@ -337,11 +329,6 @@
             cursor: pointer;
             transition: transform 0.2s;
             border: 1px solid #eee;
-        }
-
-        .provider-card:active {
-            transform: scale(0.98);
-            background-color: #fafafa;
         }
 
         .provider-avatar {
@@ -473,7 +460,7 @@
             font-size: 16px;
         }
 
-        /* TOGGLE SWITCH (Ativar/Desativar Perfil) */
+        /* TOGGLE SWITCH */
         .switch {
             position: relative;
             display: inline-block;
@@ -481,19 +468,12 @@
             height: 28px;
         }
 
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
+        .switch input { opacity: 0; width: 0; height: 0; }
 
         .slider {
             position: absolute;
             cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             background-color: #ccc;
             transition: .4s;
             border-radius: 34px;
@@ -502,22 +482,15 @@
         .slider:before {
             position: absolute;
             content: "";
-            height: 20px;
-            width: 20px;
-            left: 4px;
-            bottom: 4px;
+            height: 20px; width: 20px;
+            left: 4px; bottom: 4px;
             background-color: white;
             transition: .4s;
             border-radius: 50%;
         }
 
-        input:checked+.slider {
-            background-color: var(--success);
-        }
-
-        input:checked+.slider:before {
-            transform: translateX(26px);
-        }
+        input:checked + .slider { background-color: var(--success); }
+        input:checked + .slider:before { transform: translateX(26px); }
 
         /* SISTEMA DE AVALIAÇÃO */
         .rating-interactive {
@@ -534,9 +507,7 @@
             transition: color 0.2s;
         }
 
-        .rating-interactive i.active {
-            color: #f5b301;
-        }
+        .rating-interactive i.active { color: #f5b301; }
 
         /* TOAST */
         #toast {
@@ -562,87 +533,56 @@
         }
 
         @keyframes fadeinToast {
-            from {
-                bottom: 0;
-                opacity: 0;
-            }
-
-            to {
-                bottom: 30px;
-                opacity: 1;
-            }
+            from { bottom: 0; opacity: 0; }
+            to { bottom: 30px; opacity: 1; }
         }
 
         @keyframes fadeoutToast {
-            from {
-                bottom: 30px;
-                opacity: 1;
-            }
-
-            to {
-                bottom: 0;
-                opacity: 0;
-            }
+            from { bottom: 30px; opacity: 1; }
+            to { bottom: 0; opacity: 0; }
         }
     </style>
 </head>
 
 <body>
-    <input type="email" id="email" placeholder="Email">
-    <input type="password" id="password" placeholder="Senha">
-
-    <button onclick="registrar()">Criar Conta</button>
-    <button onclick="login()">Entrar</button>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <script>
         const SUPABASE_URL = "https://vfyegozdwpnoidafimqt.supabase.co";
         const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZmeWVnb3pkd3Bub2lkYWZpbXF0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5OTc3MTgsImV4cCI6MjA5MDU3MzcxOH0.wWD2KUMUEGC_UBl1mH8-E1iLWovAkrqEf8mreRtt5iQ";
-
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     </script>
-    <script>
-        async function registrar() {
-            const email = document.getElementById("email").value;
-            const password = document.getElementById("password").value;
-
-            const { data, error } = await supabase.auth.signUp({
-                email: email,
-                password: password
-            });
-
-            if (error) {
-                alert("Erro: " + error.message);
-            } else {
-                alert("Conta criada com sucesso!");
-            }
-        }
-    </script>
-    <script>
-        async function login() {
-            const email = document.getElementById("email").value;
-            const password = document.getElementById("password").value;
-
-            const { data, error } = await supabase.auth.signInWithPassword({
-                email: email,
-                password: password
-            });
-
-            if (error) {
-                alert("Erro: " + error.message);
-            } else {
-                alert("Login feito!");
-            }
-        }
-    </script>
-
 
     <div id="app-container">
-
         <div id="toast">Mensagem aqui</div>
 
-        <div id="screen-onboarding" class="screen active">
-            <div class="main-content"
-                style="display: flex; flex-direction: column; justify-content: center; align-items: center; padding-bottom: 20px;">
+        <div id="screen-login" class="screen active">
+            <div class="main-content" style="display: flex; flex-direction: column; justify-content: center; align-items: center; padding-top: 40px;">
+                <i class="fas fa-tools icon-logo" style="font-size: 80px; color: var(--primary); margin-bottom: 20px; animation: none;"></i>
+                <h1 style="color: var(--primary); text-align: center;">MZ Serviços</h1>
+                <p style="text-align: center; margin-bottom: 30px;">Faça login ou crie sua conta para começar.</p>
+
+                <div style="width: 100%; max-width: 320px;">
+                    <div class="form-group">
+                        <label for="auth-email">E-mail</label>
+                        <input type="email" id="auth-email" placeholder="Seu e-mail">
+                    </div>
+                    <div class="form-group">
+                        <label for="auth-password">Senha</label>
+                        <input type="password" id="auth-password" placeholder="Sua senha">
+                    </div>
+
+                    <button class="btn btn-primary" onclick="login()" style="margin-bottom: 15px;">
+                        <i class="fas fa-sign-in-alt"></i> Entrar
+                    </button>
+                    <button class="btn btn-outline" onclick="registrar()">
+                        <i class="fas fa-user-plus"></i> Criar Conta
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="screen-onboarding" class="screen">
+            <div class="main-content" style="display: flex; flex-direction: column; justify-content: center; align-items: center; padding-bottom: 20px;">
                 <i class="fas fa-tools icon-logo"></i>
                 <h1>MZ Serviços</h1>
                 <p>Encontre profissionais locais confiáveis em segundos. Simples, rápido e moçambicano.</p>
@@ -650,8 +590,7 @@
                     <button class="btn btn-secondary" onclick="navTo('screen-user-register')">
                         <i class="fas fa-search"></i> Procurar Serviços
                     </button>
-                    <button class="btn btn-outline" style="color: white; border-color: white;"
-                        onclick="openProviderTypeSelection()">
+                    <button class="btn btn-outline" style="color: white; border-color: white;" onclick="openProviderTypeSelection()">
                         <i class="fas fa-user-tie"></i> Sou Prestador de Serviços
                     </button>
                 </div>
@@ -664,8 +603,6 @@
                     <i class="fas fa-arrow-left back-btn" onclick="navTo('screen-onboarding')"></i>
                     <h2>Quase lá...</h2>
                 </div>
-
-                <button onclick="guardarUsuario()">Guardar</button>
                 <p>Diga-nos o seu nome e onde está para encontrarmos os melhores profissionais perto de si.</p>
 
                 <div class="form-group">
@@ -696,8 +633,7 @@
         </div>
 
         <div id="screen-provider-type" class="screen">
-            <div class="main-content"
-                style="display: flex; flex-direction: column; align-items: center; padding-top: 40px;">
+            <div class="main-content" style="display: flex; flex-direction: column; align-items: center; padding-top: 40px;">
                 <div class="header" style="width: 100%; border: none;">
                     <i class="fas fa-arrow-left back-btn" onclick="navTo('screen-onboarding')"></i>
                     <h2 style="margin-bottom: 0;">Tipo de Conta</h2>
@@ -705,25 +641,19 @@
                 <p style="text-align: left; width: 100%;">Como gostaria de se registar na nossa plataforma?</p>
 
                 <div style="display: flex; flex-direction: column; gap: 20px; width: 100%; margin-top: 20px;">
-                    <button class="btn btn-primary"
-                        style="padding: 25px 15px; flex-direction: column; gap: 15px; background-color: #fff; border: 2px solid var(--primary); color: var(--text-dark);"
-                        onclick="selectProviderType('instantaneo')">
+                    <button class="btn btn-primary" style="padding: 25px 15px; flex-direction: column; gap: 15px; background-color: #fff; border: 2px solid var(--primary); color: var(--text-dark);" onclick="selectProviderType('instantaneo')">
                         <i class="fas fa-tools" style="font-size: 35px; color: var(--primary);"></i>
                         <div>
                             <h3 style="margin-bottom: 5px; color: var(--primary);">Serviços Instantâneos</h3>
-                            <p style="margin: 0; font-size: 13px; color: var(--text-light); font-weight: normal;">
-                                Eletricistas, Canalizadores, Pedreiros, Mecânicos e outros serviços práticos.</p>
+                            <p style="margin: 0; font-size: 13px; color: var(--text-light); font-weight: normal;">Eletricistas, Canalizadores, Pedreiros, Mecânicos e outros serviços práticos.</p>
                         </div>
                     </button>
 
-                    <button class="btn btn-secondary"
-                        style="padding: 25px 15px; flex-direction: column; gap: 15px; background-color: #fff; border: 2px solid var(--secondary); color: var(--text-dark);"
-                        onclick="selectProviderType('especializado')">
+                    <button class="btn btn-secondary" style="padding: 25px 15px; flex-direction: column; gap: 15px; background-color: #fff; border: 2px solid var(--secondary); color: var(--text-dark);" onclick="selectProviderType('especializado')">
                         <i class="fas fa-user-tie" style="font-size: 35px; color: var(--secondary);"></i>
                         <div>
                             <h3 style="margin-bottom: 5px; color: var(--secondary);">Profissionais Especializados</h3>
-                            <p style="margin: 0; font-size: 13px; color: var(--text-light); font-weight: normal;">
-                                Engenheiros, Médicos, Professores, Advogados, Gestores e mais.</p>
+                            <p style="margin: 0; font-size: 13px; color: var(--text-light); font-weight: normal;">Engenheiros, Médicos, Professores, Advogados, Gestores e mais.</p>
                         </div>
                     </button>
                 </div>
@@ -735,11 +665,9 @@
                 <div class="header" style="border: none; justify-content: space-between; margin-bottom: 15px;">
                     <div style="display: flex; align-items: center; gap: 10px;">
                         <i class="fas fa-map-marker-alt" style="color: var(--secondary); font-size: 18px;"></i>
-                        <span id="user-location-display"
-                            style="font-weight: bold; color: var(--primary);">Localização</span>
+                        <span id="user-location-display" style="font-weight: bold; color: var(--primary);">Localização</span>
                     </div>
-                    <i class="fas fa-user-circle" style="font-size: 30px; color: #ccc; cursor: pointer;"
-                        onclick="navTo('screen-user-register')"></i>
+                    <i class="fas fa-user-circle" style="font-size: 30px; color: #ccc; cursor: pointer;" onclick="navTo('screen-user-register')"></i>
                 </div>
 
                 <div class="user-welcome">
@@ -770,14 +698,12 @@
                     <i class="fas fa-arrow-left back-btn" onclick="navTo('screen-home')"></i>
                     <div>
                         <h2 id="list-title" style="margin-bottom: 0;">Profissionais</h2>
-                        <p style="margin-bottom: 0; font-size: 12px;">Em <span id="location-target"
-                                style="font-weight:bold;">Sua Área</span></p>
+                        <p style="margin-bottom: 0; font-size: 12px;">Em <span id="location-target" style="font-weight:bold;">Sua Área</span></p>
                     </div>
                 </div>
 
                 <div class="search-bar">
-                    <input type="text" id="providerSearch" placeholder="🔍 Pesquisar por nome ou especialidade..."
-                        onkeyup="filterProvidersBySearch()">
+                    <input type="text" id="providerSearch" placeholder="🔍 Pesquisar por nome ou especialidade..." onkeyup="filterProvidersBySearch()">
                 </div>
 
                 <div id="providers-container"></div>
@@ -794,29 +720,24 @@
                 <div class="profile-main">
                     <img src="" id="prof-img" class="profile-avatar-big" alt="Foto do Profissional">
                     <h3 id="prof-name">Nome do Profissional</h3>
-                    <p id="prof-service" style="color: var(--primary); font-weight: bold; margin-bottom: 5px;">Serviço
-                    </p>
-                    <div id="prof-cert-badge"
-                        style="display: none; margin-bottom: 10px; font-size: 12px; color: var(--success);">
+                    <p id="prof-service" style="color: var(--primary); font-weight: bold; margin-bottom: 5px;">Serviço</p>
+                    <div id="prof-cert-badge" style="display: none; margin-bottom: 10px; font-size: 12px; color: var(--success);">
                         <i class="fas fa-check-circle"></i> Certificado de Licenciatura Submetido
                     </div>
                     <div class="provincia-tag">
                         <i class="fas fa-map-marker-alt"></i> <span id="prof-prov">Província</span>
                     </div>
                     <div class="stars" style="justify-content: center; font-size: 16px;">
-                        <i class="fas fa-star"></i> <span id="prof-rating">0.0</span> <span
-                            style="color: #bbb; font-weight: normal; font-size: 13px;">(Média)</span>
+                        <i class="fas fa-star"></i> <span id="prof-rating">0.0</span> <span style="color: #bbb; font-weight: normal; font-size: 13px;">(Média)</span>
                     </div>
                 </div>
 
                 <div class="profile-stats">
                     <div class="stat-item">
-                        <strong id="prof-exp">5+</strong>
-                        <span>Anos Exp.</span>
+                        <strong id="prof-exp">5+</strong><span>Anos Exp.</span>
                     </div>
                     <div class="stat-item">
-                        <strong id="prof-age">--</strong>
-                        <span>Idade</span>
+                        <strong id="prof-age">--</strong><span>Idade</span>
                     </div>
                 </div>
 
@@ -860,21 +781,17 @@
                     <h3 id="my-prof-name">Nome</h3>
                     <p id="my-prof-service" style="color: var(--primary); font-weight: bold;">Serviço</p>
 
-                    <div
-                        style="background: var(--bg-color); padding: 15px; border-radius: 12px; margin-top: 20px; display: flex; align-items: center; justify-content: space-between;">
+                    <div style="background: var(--bg-color); padding: 15px; border-radius: 12px; margin-top: 20px; display: flex; align-items: center; justify-content: space-between;">
                         <div style="text-align: left;">
                             <h4 style="margin-bottom: 2px;">Status do Perfil</h4>
-                            <span id="profile-status-text"
-                                style="font-size: 13px; color: var(--success); font-weight: bold;">Ativo
-                                (Público)</span>
+                            <span id="profile-status-text" style="font-size: 13px; color: var(--success); font-weight: bold;">Ativo (Público)</span>
                         </div>
                         <label class="switch">
                             <input type="checkbox" id="profile-toggle" onchange="toggleProfileStatus()">
                             <span class="slider"></span>
                         </label>
                     </div>
-                    <p style="font-size: 12px; margin-top: 10px; color: #888; text-align: left;">Desative se não estiver
-                        disponível para receber trabalhos.</p>
+                    <p style="font-size: 12px; margin-top: 10px; color: #888; text-align: left;">Desative se não estiver disponível para receber trabalhos.</p>
                 </div>
 
                 <button class="btn btn-primary" style="margin-bottom: 15px;" onclick="openEditMode()">
@@ -889,19 +806,14 @@
                     <i class="fas fa-arrow-left back-btn" id="reg-back-btn" onclick="navTo('screen-provider-type')"></i>
                     <h2 id="reg-title">Aderir como Profissional</h2>
                 </div>
-                <p id="reg-subtitle">Preencha os dados abaixo. O seu perfil ficará visível imediatamente para clientes
-                    na sua província.</p>
+                <p id="reg-subtitle">Preencha os dados abaixo. O seu perfil ficará visível imediatamente para clientes na sua província.</p>
 
-                <div
-                    style="background: var(--white); padding: 20px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-
+                <div style="background: var(--white); padding: 20px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
                     <div class="form-group" style="text-align: center;">
                         <label>Sua Foto de Perfil *</label>
                         <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
-                            <img id="reg-photo-preview" src="https://via.placeholder.com/100?text=Foto"
-                                style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 2px solid #ccc;">
-                            <input type="file" id="reg-photo" accept="image/*"
-                                onchange="previewPhoto(event, 'reg-photo-preview', true)">
+                            <img id="reg-photo-preview" src="https://via.placeholder.com/100?text=Foto" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 2px solid #ccc;">
+                            <input type="file" id="reg-photo" accept="image/*" onchange="previewPhoto(event, 'reg-photo-preview', true)">
                         </div>
                     </div>
 
@@ -928,16 +840,11 @@
                         </select>
                     </div>
 
-                    <div class="form-group" id="reg-cert-group"
-                        style="display: none; background-color: #f8f9fa; padding: 15px; border-radius: 10px; border: 1px dashed var(--primary);">
-                        <label><i class="fas fa-file-contract" style="color: var(--primary);"></i> Certificado de
-                            Licenciatura *</label>
-                        <p style="font-size: 12px; margin-bottom: 10px;">Anexe uma foto do seu certificado para
-                            validação.</p>
-                        <input type="file" id="reg-cert" accept="image/*"
-                            onchange="previewPhoto(event, 'reg-cert-preview', false)">
-                        <img id="reg-cert-preview"
-                            style="width: 100%; max-height: 150px; object-fit: contain; margin-top: 10px; display: none;">
+                    <div class="form-group" id="reg-cert-group" style="display: none; background-color: #f8f9fa; padding: 15px; border-radius: 10px; border: 1px dashed var(--primary);">
+                        <label><i class="fas fa-file-contract" style="color: var(--primary);"></i> Certificado de Licenciatura *</label>
+                        <p style="font-size: 12px; margin-bottom: 10px;">Anexe uma foto do seu certificado para validação.</p>
+                        <input type="file" id="reg-cert" accept="image/*" onchange="previewPhoto(event, 'reg-cert-preview', false)">
+                        <img id="reg-cert-preview" style="width: 100%; max-height: 150px; object-fit: contain; margin-top: 10px; display: none;">
                     </div>
 
                     <div class="form-group">
@@ -971,14 +878,12 @@
                     </div>
                     <div class="form-group">
                         <label>Pequena Apresentação (Sua Descrição) *</label>
-                        <textarea id="reg-desc" rows="3"
-                            placeholder="Ex: Faço o meu trabalho com excelência e garantia."></textarea>
+                        <textarea id="reg-desc" rows="3" placeholder="Ex: Faço o meu trabalho com excelência e garantia."></textarea>
                     </div>
 
                     <p style="font-size: 12px; color: #888;">* Campos obrigatórios.</p>
 
-                    <button class="btn btn-secondary" style="margin-top: 15px;" id="reg-submit-btn"
-                        onclick="saveProviderProfile()">
+                    <button class="btn btn-secondary" style="margin-top: 15px;" id="reg-submit-btn" onclick="saveProviderProfile()">
                         <i class="fas fa-check-circle"></i> Submeter Meu Cadastro
                     </button>
                 </div>
@@ -988,9 +893,56 @@
     </div>
 
     <script>
-        /* --- LÓGICA DO APLICATIVO (JAVASCRIPT) --- */
+        /* --- LÓGICA DE AUTENTICAÇÃO SUPABASE --- */
+        async function registrar() {
+            const email = document.getElementById("auth-email").value;
+            const password = document.getElementById("auth-password").value;
 
-        // Listas de Serviços Divididas
+            if(!email || !password) {
+                showToast("⚠️ Preencha email e senha para continuar.");
+                return;
+            }
+
+            showToast("A criar conta, por favor aguarde...");
+
+            const { data, error } = await supabase.auth.signUp({
+                email: email,
+                password: password
+            });
+
+            if (error) {
+                showToast("Erro: " + error.message);
+            } else {
+                showToast("✅ Conta criada com sucesso!");
+                navTo('screen-onboarding'); // Transita para o app!
+            }
+        }
+
+        async function login() {
+            const email = document.getElementById("auth-email").value;
+            const password = document.getElementById("auth-password").value;
+
+            if(!email || !password) {
+                showToast("⚠️ Preencha email e senha para entrar.");
+                return;
+            }
+
+            showToast("A iniciar sessão...");
+
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email: email,
+                password: password
+            });
+
+            if (error) {
+                showToast("Erro: " + error.message);
+            } else {
+                showToast("✅ Login efetuado com sucesso!");
+                navTo('screen-onboarding'); // Transita para o app!
+            }
+        }
+
+        /* --- LÓGICA DO APLICATIVO (JAVASCRIPT) --- */
         const listaServicosInstantaneos = [
             { id: 'canal', nome: 'Canalizador', icon: 'fa-faucet' },
             { id: 'eletri', nome: 'Eletricista', icon: 'fa-bolt' },
@@ -1023,23 +975,15 @@
             'Advogado': { icon: 'fa-balance-scale', subs: [] }
         };
 
-        // BASE DE DADOS LIMPA
         let prestadoresDB = [];
-
-        // ESTADO GLOBAL DO APP
         let currentUser = { nome: "", provincia: "", providerId: null };
         let currentServiceSelected = "";
         let currentProviderListing = [];
         let currentPhotoBase64 = "";
-        let currentCertBase64 = ""; // Novo estado para certificado
+        let currentCertBase64 = ""; 
         let isEditMode = false;
-        let currentRegistrationType = ""; // "instantaneo" ou "especializado"
+        let currentRegistrationType = ""; 
         let currentlyViewedProviderId = null;
-
-        // INICIALIZAÇÃO
-        window.onload = function () {
-            // Nada a carregar por padrão no onload para dropdowns, será feito ao selecionar o tipo
-        };
 
         function navTo(screenId) {
             document.querySelectorAll('.screen').forEach(el => el.classList.remove('active'));
@@ -1050,7 +994,6 @@
             }
         }
 
-        // --- LÓGICA DE USUÁRIO COMUM ---
         function finalizeUserRegister() {
             const nameInp = document.getElementById('userName').value.trim();
             const provInp = document.getElementById('userProvince').value;
@@ -1079,58 +1022,42 @@
             containerInstantaneo.innerHTML = '';
             containerEspec.innerHTML = '';
 
-            // Renderizar Instantâneos
             listaServicosInstantaneos.forEach(serv => {
                 const card = document.createElement('div');
                 card.className = 'service-card';
                 card.onclick = () => selectServiceAndLoadProviders(serv.nome, 'instantaneo');
-                card.innerHTML = `
-                <i class="fas ${serv.icon}"></i>
-                <span>${serv.nome}</span>
-            `;
+                card.innerHTML = `<i class="fas ${serv.icon}"></i><span>${serv.nome}</span>`;
                 containerInstantaneo.appendChild(card);
             });
 
-            // Renderizar Especializados
             Object.keys(listaEspecializados).forEach(key => {
                 const serv = listaEspecializados[key];
                 const card = document.createElement('div');
                 card.className = 'service-card';
                 card.style.borderColor = '#eee';
                 card.onclick = () => selectServiceAndLoadProviders(key, 'especializado');
-                card.innerHTML = `
-                <i class="fas ${serv.icon}" style="color: var(--secondary);"></i>
-                <span>${key}</span>
-            `;
+                card.innerHTML = `<i class="fas ${serv.icon}" style="color: var(--secondary);"></i><span>${key}</span>`;
                 containerEspec.appendChild(card);
             });
 
-            // Mostra botão de gerir perfil se for prestador
             if (currentUser.providerId !== null) {
                 document.getElementById('my-profile-banner').style.display = 'block';
             }
         }
 
-        // --- LÓGICA DE ESCOLHA DE TIPO DE PRESTADOR ---
-        function openProviderTypeSelection() {
-            navTo('screen-provider-type');
-        }
+        function openProviderTypeSelection() { navTo('screen-provider-type'); }
 
         function selectProviderType(type) {
             currentRegistrationType = type;
             isEditMode = false;
-
-            // Reset Base64
             currentPhotoBase64 = "";
             currentCertBase64 = "";
 
-            // Setup Form
             document.getElementById('reg-title').innerText = type === 'instantaneo' ? "Aderir (Serviços)" : "Aderir (Especializado)";
             document.getElementById('reg-subtitle').style.display = "block";
             document.getElementById('reg-submit-btn').innerHTML = '<i class="fas fa-check-circle"></i> Submeter Meu Cadastro';
             document.getElementById('reg-back-btn').onclick = () => navTo('screen-provider-type');
 
-            // Limpar Campos
             document.getElementById('reg-name').value = '';
             document.getElementById('reg-tel').value = '';
             document.getElementById('reg-province').value = '';
@@ -1138,21 +1065,18 @@
             document.getElementById('reg-age').value = '';
             document.getElementById('reg-desc').value = '';
             document.getElementById('reg-photo-preview').src = "https://via.placeholder.com/100?text=Foto";
-
             document.getElementById('reg-cert').value = '';
             document.getElementById('reg-cert-preview').style.display = 'none';
             document.getElementById('reg-cert-preview').src = '';
 
             populateServiceDropdowns(type);
 
-            // Controlar visibilidade de áreas exclusivas do Especializado
             if (type === 'especializado') {
                 document.getElementById('reg-cert-group').style.display = 'block';
             } else {
                 document.getElementById('reg-cert-group').style.display = 'none';
                 document.getElementById('reg-subcategory-group').style.display = 'none';
             }
-
             navTo('screen-provider-register');
         }
 
@@ -1163,15 +1087,13 @@
             if (type === 'instantaneo') {
                 listaServicosInstantaneos.forEach(s => {
                     const opt = document.createElement('option');
-                    opt.value = s.nome;
-                    opt.innerText = s.nome;
+                    opt.value = s.nome; opt.innerText = s.nome;
                     sel.appendChild(opt);
                 });
             } else if (type === 'especializado') {
                 Object.keys(listaEspecializados).forEach(k => {
                     const opt = document.createElement('option');
-                    opt.value = k;
-                    opt.innerText = k;
+                    opt.value = k; opt.innerText = k;
                     sel.appendChild(opt);
                 });
             }
@@ -1190,8 +1112,7 @@
                 subGroup.style.display = 'block';
                 listaEspecializados[selValue].subs.forEach(sub => {
                     const opt = document.createElement('option');
-                    opt.value = sub;
-                    opt.innerText = sub;
+                    opt.value = sub; opt.innerText = sub;
                     subSel.appendChild(opt);
                 });
             } else {
@@ -1199,17 +1120,13 @@
             }
         }
 
-        // Upload de Imagens para Base64 (Reutilizável para foto e certificado)
         function previewPhoto(event, previewId, isProfilePic) {
             const file = event.target.files[0];
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function (e) {
-                    if (isProfilePic) {
-                        currentPhotoBase64 = e.target.result;
-                    } else {
-                        currentCertBase64 = e.target.result;
-                    }
+                    if (isProfilePic) { currentPhotoBase64 = e.target.result; } 
+                    else { currentCertBase64 = e.target.result; }
                     const imgTag = document.getElementById(previewId);
                     imgTag.src = e.target.result;
                     imgTag.style.display = 'block';
@@ -1226,98 +1143,48 @@
             const exp = document.getElementById('reg-exp').value;
             const age = document.getElementById('reg-age').value;
             const desc = document.getElementById('reg-desc').value.trim();
-
             let subCategory = "";
 
-            if (currentRegistrationType === 'especializado') {
-                if (document.getElementById('reg-subcategory-group').style.display !== 'none') {
-                    subCategory = document.getElementById('reg-subcategory').value;
-                    if (!subCategory) {
-                        showToast("⚠️ Selecione a especialidade (ramo) do seu serviço.");
-                        return;
-                    }
-                }
+            if (currentRegistrationType === 'especializado' && document.getElementById('reg-subcategory-group').style.display !== 'none') {
+                subCategory = document.getElementById('reg-subcategory').value;
+                if (!subCategory) { showToast("⚠️ Selecione a especialidade (ramo) do seu serviço."); return; }
             }
 
-            if (!name || !telRaw || !service || !prov || !exp || !desc) {
-                showToast("⚠️ Preencha todos os campos obrigatórios (*).");
-                return;
-            }
+            if (!name || !telRaw || !service || !prov || !exp || !desc) { showToast("⚠️ Preencha todos os campos obrigatórios (*)."); return; }
             if (!/^[8][2-7][0-9]{7}$/.test(telRaw) && telRaw.length >= 9) {
-                if (telRaw.length < 9) {
-                    showToast("⚠️ O número deve ter pelo menos 9 dígitos.");
-                    return;
-                }
+                if (telRaw.length < 9) { showToast("⚠️ O número deve ter pelo menos 9 dígitos."); return; }
             }
-            if (!currentPhotoBase64 && !isEditMode) {
-                showToast("⚠️ Por favor, faça upload de uma foto de perfil.");
-                return;
-            }
-            if (currentRegistrationType === 'especializado' && !currentCertBase64 && !isEditMode) {
-                showToast("⚠️ O upload do Certificado de Licenciatura é obrigatório.");
-                return;
-            }
+            if (!currentPhotoBase64 && !isEditMode) { showToast("⚠️ Por favor, faça upload de uma foto de perfil."); return; }
+            if (currentRegistrationType === 'especializado' && !currentCertBase64 && !isEditMode) { showToast("⚠️ O upload do Certificado é obrigatório."); return; }
 
             const telSanitized = telRaw.startsWith("258") ? telRaw : "258" + telRaw;
 
             if (isEditMode) {
-                // ATUALIZAR EXISTENTE
                 const p = prestadoresDB.find(item => item.id === currentUser.providerId);
-                p.nome = name;
-                p.tel = telSanitized;
-                p.servico = service;
-                p.subcategoria = subCategory;
-                p.provincia = prov;
-                p.exp = exp;
-                p.idade = age ? parseInt(age) : null;
-                p.desc = desc;
+                p.nome = name; p.tel = telSanitized; p.servico = service; p.subcategoria = subCategory; p.provincia = prov; p.exp = exp; p.idade = age ? parseInt(age) : null; p.desc = desc;
                 if (currentPhotoBase64) p.foto = currentPhotoBase64;
                 if (currentCertBase64) p.certificado = currentCertBase64;
-
                 showToast("✅ Perfil atualizado com sucesso!");
                 openManageProfile();
-
             } else {
-                // CRIAR NOVO
                 const novoID = Date.now();
                 const novoPrestador = {
-                    id: novoID,
-                    ativo: true,
-                    tipo: currentRegistrationType, // "instantaneo" ou "especializado"
-                    nome: name,
-                    servico: service,
-                    subcategoria: subCategory,
-                    provincia: prov,
-                    exp: exp,
-                    idade: age ? parseInt(age) : null,
-                    avaliacoes: [],
-                    foto: currentPhotoBase64,
-                    certificado: currentCertBase64,
-                    tel: telSanitized,
-                    desc: desc
+                    id: novoID, ativo: true, tipo: currentRegistrationType, nome: name, servico: service, subcategoria: subCategory,
+                    provincia: prov, exp: exp, idade: age ? parseInt(age) : null, avaliacoes: [], foto: currentPhotoBase64, certificado: currentCertBase64, tel: telSanitized, desc: desc
                 };
-
                 prestadoresDB.unshift(novoPrestador);
                 currentUser.providerId = novoID;
-
                 showToast("✅ Cadastro realizado! Você já está visível.");
 
-                if (currentUser.nome) {
-                    renderServicesHome();
-                    navTo('screen-home');
-                } else {
-                    setTimeout(() => navTo('screen-user-register'), 1500);
-                }
+                if (currentUser.nome) { renderServicesHome(); navTo('screen-home'); } 
+                else { setTimeout(() => navTo('screen-user-register'), 1500); }
             }
         }
 
-
-        // --- LÓGICA DE LISTAGEM DE PRESTADORES ---
         function selectServiceAndLoadProviders(serviceName, type) {
             currentServiceSelected = serviceName;
             document.getElementById('list-title').innerText = serviceName;
             document.getElementById('providerSearch').value = '';
-
             loadProvidersByServiceAndProvince();
             navTo('screen-provider-list');
         }
@@ -1325,23 +1192,16 @@
         function loadProvidersByServiceAndProvince() {
             const container = document.getElementById('providers-container');
             container.innerHTML = '';
-
-            currentProviderListing = prestadoresDB.filter(p =>
-                p.servico === currentServiceSelected &&
-                p.provincia === currentUser.provincia &&
-                p.ativo === true
-            );
+            currentProviderListing = prestadoresDB.filter(p => p.servico === currentServiceSelected && p.provincia === currentUser.provincia && p.ativo === true);
 
             if (currentProviderListing.length === 0) {
                 container.innerHTML = `
                 <div style="text-align: center; margin-top: 50px; padding: 20px; color: #888;">
                     <i class="fas fa-user-slash" style="font-size: 40px; margin-bottom: 15px;"></i>
                     <p>Ainda não temos <strong>${currentServiceSelected}s</strong> disponíveis em <strong>${currentUser.provincia}</strong>.</p>
-                </div>
-            `;
+                </div>`;
                 return;
             }
-
             renderProviderCards(currentProviderListing);
         }
 
@@ -1351,7 +1211,6 @@
             data.forEach(p => {
                 let media = p.avaliacoes.length > 0 ? (p.avaliacoes.reduce((a, b) => a + b, 0) / p.avaliacoes.length).toFixed(1) : "Novo";
                 let subcatHtml = p.subcategoria ? `<span class="badge">${p.subcategoria}</span>` : '';
-
                 const card = document.createElement('div');
                 card.className = 'provider-card';
                 card.onclick = () => showProviderProfile(p.id);
@@ -1363,33 +1222,24 @@
                     <p style="margin-top:4px;"><i class="fas fa-business-time"></i> ${p.exp} anos</p>
                     <div class="stars"><i class="fas fa-star"></i> ${media}</div>
                 </div>
-                <i class="fas fa-chevron-right" style="color: #ccc;"></i>
-            `;
+                <i class="fas fa-chevron-right" style="color: #ccc;"></i>`;
                 container.appendChild(card);
             });
         }
 
         function filterProvidersBySearch() {
             const term = document.getElementById('providerSearch').value.toLowerCase();
-            if (!term) {
-                renderProviderCards(currentProviderListing);
-                return;
-            }
-            const filtered = currentProviderListing.filter(p =>
-                p.nome.toLowerCase().includes(term) ||
-                (p.subcategoria && p.subcategoria.toLowerCase().includes(term))
-            );
+            if (!term) { renderProviderCards(currentProviderListing); return; }
+            const filtered = currentProviderListing.filter(p => p.nome.toLowerCase().includes(term) || (p.subcategoria && p.subcategoria.toLowerCase().includes(term)));
             renderProviderCards(filtered);
         }
 
-        // --- LÓGICA DO PERFIL (VISÃO DO CLIENTE) ---
         function showProviderProfile(providerId) {
             currentlyViewedProviderId = providerId;
             const p = prestadoresDB.find(item => item.id === providerId);
             if (!p) return;
 
             let media = p.avaliacoes.length > 0 ? (p.avaliacoes.reduce((a, b) => a + b, 0) / p.avaliacoes.length).toFixed(1) : "Novo";
-
             document.getElementById('prof-img').src = p.foto;
             document.getElementById('prof-name').innerText = p.nome;
 
@@ -1397,12 +1247,8 @@
             if (p.subcategoria) servicoDisplay += ` - ${p.subcategoria}`;
             document.getElementById('prof-service').innerText = servicoDisplay;
 
-            // Verifica se tem certificado (Apenas para tipo especializado)
-            if (p.tipo === 'especializado' && p.certificado) {
-                document.getElementById('prof-cert-badge').style.display = 'block';
-            } else {
-                document.getElementById('prof-cert-badge').style.display = 'none';
-            }
+            if (p.tipo === 'especializado' && p.certificado) { document.getElementById('prof-cert-badge').style.display = 'block'; } 
+            else { document.getElementById('prof-cert-badge').style.display = 'none'; }
 
             document.getElementById('prof-prov').innerText = p.provincia;
             document.getElementById('prof-rating').innerText = media;
@@ -1412,23 +1258,15 @@
 
             resetStarUI();
 
-            if (currentUser.providerId === providerId) {
-                document.getElementById('rating-widget-container').style.display = 'none';
-            } else {
-                document.getElementById('rating-widget-container').style.display = 'block';
-            }
+            if (currentUser.providerId === providerId) { document.getElementById('rating-widget-container').style.display = 'none'; } 
+            else { document.getElementById('rating-widget-container').style.display = 'block'; }
 
-            const btnWa = document.getElementById('btn-wa');
-            btnWa.onclick = function () {
+            document.getElementById('btn-wa').onclick = function () {
                 const mensagem = encodeURIComponent(`Olá ${p.nome}, vi o teu perfil no app *MZ Serviços* e preciso dos teus serviços. Estás disponível?`);
                 window.open(`https://wa.me/${p.tel}?text=${mensagem}`, '_blank');
             };
 
-            const btnCall = document.getElementById('btn-call');
-            btnCall.onclick = function () {
-                window.open(`tel:+${p.tel}`, '_self');
-            };
-
+            document.getElementById('btn-call').onclick = function () { window.open(`tel:+${p.tel}`, '_self'); };
             navTo('screen-provider-profile');
         }
 
@@ -1436,43 +1274,30 @@
             if (!currentlyViewedProviderId) return;
             const stars = document.querySelectorAll('#user-rating-stars i');
             stars.forEach(s => {
-                if (parseInt(s.getAttribute('data-val')) <= ratingValue) {
-                    s.classList.add('active');
-                } else {
-                    s.classList.remove('active');
-                }
+                if (parseInt(s.getAttribute('data-val')) <= ratingValue) { s.classList.add('active'); } 
+                else { s.classList.remove('active'); }
             });
-
             const p = prestadoresDB.find(item => item.id === currentlyViewedProviderId);
             p.avaliacoes.push(ratingValue);
-
             let media = (p.avaliacoes.reduce((a, b) => a + b, 0) / p.avaliacoes.length).toFixed(1);
             document.getElementById('prof-rating').innerText = media;
-
             showToast(`✅ Avaliaste o profissional com ${ratingValue} estrelas!`);
         }
 
-        function resetStarUI() {
-            document.querySelectorAll('#user-rating-stars i').forEach(s => s.classList.remove('active'));
-        }
+        function resetStarUI() { document.querySelectorAll('#user-rating-stars i').forEach(s => s.classList.remove('active')); }
 
-        // --- LÓGICA DE GERIR PERFIL ---
         function openManageProfile() {
             if (!currentUser.providerId) return;
             const p = prestadoresDB.find(item => item.id === currentUser.providerId);
             if (!p) return;
-
             document.getElementById('my-prof-img').src = p.foto;
             document.getElementById('my-prof-name').innerText = p.nome;
-
             let servTxt = p.servico;
             if (p.subcategoria) servTxt += ` (${p.subcategoria})`;
             document.getElementById('my-prof-service').innerText = servTxt;
-
             const toggle = document.getElementById('profile-toggle');
             toggle.checked = p.ativo;
             updateStatusText(p.ativo);
-
             navTo('screen-manage-profile');
         }
 
@@ -1481,39 +1306,25 @@
             const toggle = document.getElementById('profile-toggle');
             p.ativo = toggle.checked;
             updateStatusText(p.ativo);
-
-            if (p.ativo) {
-                showToast("✅ O teu perfil está agora PÚBLICO.");
-            } else {
-                showToast("🔒 Perfil DESATIVADO. Não aparecerás nas pesquisas.");
-            }
+            if (p.ativo) { showToast("✅ O teu perfil está agora PÚBLICO."); } 
+            else { showToast("🔒 Perfil DESATIVADO. Não aparecerás nas pesquisas."); }
         }
 
         function updateStatusText(isAtivo) {
             const statusText = document.getElementById('profile-status-text');
-            if (isAtivo) {
-                statusText.innerText = "Ativo (Público)";
-                statusText.style.color = "var(--success)";
-            } else {
-                statusText.innerText = "Inativo (Oculto)";
-                statusText.style.color = "var(--text-light)";
-            }
+            if (isAtivo) { statusText.innerText = "Ativo (Público)"; statusText.style.color = "var(--success)"; } 
+            else { statusText.innerText = "Inativo (Oculto)"; statusText.style.color = "var(--text-light)"; }
         }
 
         function openEditMode() {
             const p = prestadoresDB.find(item => item.id === currentUser.providerId);
             if (!p) return;
-
-            isEditMode = true;
-            currentRegistrationType = p.tipo;
-
+            isEditMode = true; currentRegistrationType = p.tipo;
             document.getElementById('reg-title').innerText = "Editar Meu Perfil";
             document.getElementById('reg-subtitle').style.display = "none";
             document.getElementById('reg-submit-btn').innerHTML = '<i class="fas fa-save"></i> Guardar Alterações';
             document.getElementById('reg-back-btn').onclick = () => navTo('screen-manage-profile');
-
             populateServiceDropdowns(p.tipo);
-
             document.getElementById('reg-name').value = p.nome;
             document.getElementById('reg-tel').value = p.tel.replace("258", "");
             document.getElementById('reg-service').value = p.servico;
@@ -1531,32 +1342,20 @@
             document.getElementById('reg-exp').value = p.exp;
             document.getElementById('reg-age').value = p.idade || "";
             document.getElementById('reg-desc').value = p.desc;
-
-            currentPhotoBase64 = "";
-            document.getElementById('reg-photo-preview').src = p.foto;
-
+            currentPhotoBase64 = ""; document.getElementById('reg-photo-preview').src = p.foto;
             currentCertBase64 = "";
             if (p.certificado) {
                 document.getElementById('reg-cert-preview').src = p.certificado;
                 document.getElementById('reg-cert-preview').style.display = 'block';
-            } else {
-                document.getElementById('reg-cert-preview').style.display = 'none';
-            }
-
+            } else { document.getElementById('reg-cert-preview').style.display = 'none'; }
             navTo('screen-provider-register');
         }
 
-        // UTILITÁRIO: Toast Message
         function showToast(message) {
             const toast = document.getElementById("toast");
-            toast.innerText = message;
-            toast.className = "show";
+            toast.innerText = message; toast.className = "show";
             setTimeout(function () { toast.className = toast.className.replace("show", ""); }, 3000);
         }
-
     </script>
-
-
 </body>
-
 </html>
